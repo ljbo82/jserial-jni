@@ -1,0 +1,6 @@
+[submodule "libs/jni-native-headers"]
+	path = libs/jni-native-headers
+	url = https://github.com/ljbo82/jni-native-headers.git
+[submodule "libs/libserial"]
+	path = libs/libserial
+	url = https://github.com/ljbo82/libserial.git
