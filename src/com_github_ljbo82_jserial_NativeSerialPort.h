@@ -15,34 +15,34 @@ extern "C" {
 #define com_github_ljbo82_jserial_NativeSerialPort_TIMEOUT -7L
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_native_lib_version
+ * Method:    getNativeLibVersion
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1native_1lib_1version
+JNIEXPORT jstring JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getNativeLibVersion
   (JNIEnv *, jclass);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_port_names
+ * Method:    getPortNames
  * Signature: ()[Ljava/lang/String;
  */
-JNIEXPORT jobjectArray JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1port_1names
+JNIEXPORT jobjectArray JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getPortNames
   (JNIEnv *, jclass);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_current_error
+ * Method:    getCurrentError
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1current_1error
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getCurrentError
   (JNIEnv *, jclass);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    clear_current_error
+ * Method:    clearCurrentError
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_clear_1current_1error
+JNIEXPORT void JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_clearCurrentError
   (JNIEnv *, jclass);
 
 /*
@@ -79,50 +79,50 @@ JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_purge
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_baud
+ * Method:    getBaud
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1baud
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getBaud
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_data_bits
+ * Method:    getDataBits
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1data_1bits
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getDataBits
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_parity
+ * Method:    getParity
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1parity
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getParity
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_stop_bits
+ * Method:    getStopBits
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1stop_1bits
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getStopBits
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    set_read_timeout
+ * Method:    setReadTimeout
  * Signature: (JJ)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_set_1read_1timeout
+JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_setReadTimeout
   (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_github_ljbo82_jserial_NativeSerialPort
- * Method:    get_read_timeout
+ * Method:    getReadTimeout
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1read_1timeout
+JNIEXPORT jlong JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getReadTimeout
   (JNIEnv *, jclass, jlong);
 
 /*

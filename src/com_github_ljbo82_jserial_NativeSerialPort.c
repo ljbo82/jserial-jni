@@ -21,7 +21,6 @@ SOFTWARE.
 */
 #include "com_github_ljbo82_jserial_NativeSerialPort.h"
 
-#define STATIC_LIB
 #include <serial.h>
 
 #ifndef LIB_VERSION
@@ -31,7 +30,8 @@ SOFTWARE.
 
 #define __MIN(a,b) (a) < (b) ? (a) : (b)
 
-JNIEXPORT jstring JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1native_1lib_1version(JNIEnv* env, jclass cls) {
+JNIEXPORT jstring JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getNativeLibVersion(JNIEnv* env, jclass cls) {
+	errno = 0;
 	static jstring mVersion = NULL;
 	if (!mVersion) {
 		mVersion = (*env)->NewStringUTF(env, LIB_VERSION);
@@ -40,7 +40,9 @@ JNIEXPORT jstring JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1n
 	return mVersion;
 }
 
-JNIEXPORT jobjectArray JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1port_1names(JNIEnv* env, jclass cls) {
+#include <stdio.h>
+JNIEXPORT jobjectArray JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getPortNames(JNIEnv* env, jclass cls) {
+	errno = 0;
 	static serial_list_t* mList = NULL;
 
 	if (!mList) {
@@ -64,23 +66,26 @@ error:
 	return NULL;
 }
 
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1current_1error(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getCurrentError(JNIEnv* env, jclass cls) {
 	return errno;
 }
 
-JNIEXPORT void JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_clear_1current_1error(JNIEnv* env, jclass cls) {
+JNIEXPORT void JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_clearCurrentError(JNIEnv* env, jclass cls) {
 	errno = 0;
 }
 
 JNIEXPORT jlong JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_open(JNIEnv* env, jclass cls, jstring portName) {
+	errno = 0;
 	return (jlong)serial_open((*env)->GetStringUTFChars(env, portName, NULL));
 }
 
 JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_close(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	return serial_close((serial_t*)nativePort);
 }
 
 JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_config(JNIEnv* env, jclass cls, jlong nativePort, jint baud, jint dataBits, jint parity, jint stopBits) {
+	errno = 0;
 	serial_config_t cfg = {
 		.baud     = baud,
 		.dataBits = dataBits,
@@ -92,42 +97,50 @@ JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_confi
 }
 
 JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_purge(JNIEnv* env, jclass cls, jlong nativePort, jint purgeType) {
+	errno = 0;
 	return serial_purge((serial_t*)nativePort, purgeType);
 }
 
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1baud(JNIEnv* env, jclass cls, jlong nativePort) {
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getBaud(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	serial_config_t cfg;
 	serial_get_config((serial_t*)nativePort, &cfg);
 	return cfg.baud;
 }
 
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1data_1bits(JNIEnv* env, jclass cls, jlong nativePort) {
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getDataBits(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	serial_config_t cfg;
 	serial_get_config((serial_t*)nativePort, &cfg);
 	return cfg.dataBits;
 }
 
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1parity(JNIEnv* env, jclass cls, jlong nativePort) {
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getParity(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	serial_config_t cfg;
 	serial_get_config((serial_t*)nativePort, &cfg);
 	return cfg.parity;
 }
 
-JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1stop_1bits(JNIEnv* env, jclass cls, jlong nativePort) {
+JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getStopBits(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	serial_config_t cfg;
 	serial_get_config((serial_t*)nativePort, &cfg);
 	return cfg.stopBits;
 }
 
-JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_set_1read_1timeout(JNIEnv* env, jclass cls, jlong nativePort, jlong millis) {
+JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_setReadTimeout(JNIEnv* env, jclass cls, jlong nativePort, jlong millis) {
+	errno = 0;
 	return serial_set_read_timeout((serial_t*)nativePort, millis);
 }
 
-JNIEXPORT jlong JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_get_1read_1timeout(JNIEnv* env, jclass cls, jlong nativePort) {
+JNIEXPORT jlong JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_getReadTimeout(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	return serial_get_read_timeout((serial_t*)nativePort);
 }
 
 JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_read(JNIEnv* env, jclass cls, jlong nativePort, jbyteArray out, jint off, jint len) {
+	errno = 0;
 	if (off < 0) {
 		errno = SERIAL_ERROR_INVALID_PARAM;
 		return -1;
@@ -148,9 +161,9 @@ JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_read(JNIE
 	uint32_t totalRead = 0;
 
 	int previousError = errno;
-	while (serial_available((serial_t*)nativePort) && len) {
+	do {
 		mRead = serial_read((serial_t*)nativePort, buffer, __MIN(sizeof(buffer), len));
-		if (mRead) {
+		if (mRead > 0) {
 			(*env)->SetByteArrayRegion(env, out, off, mRead, buffer);
 			len -= mRead;
 			off += mRead;
@@ -169,12 +182,13 @@ JNIEXPORT jint JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_read(JNIE
 				}
 			}
 		}
-	}
+	} while (len);
 
 	return totalRead;
 }
 
 JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_write(JNIEnv* env, jclass cls, jlong nativePort, jbyteArray in, jint off, jint len) {
+	errno = 0;
 	if (off < 0) {
 		errno = SERIAL_ERROR_INVALID_PARAM;
 		return -1;
@@ -210,5 +224,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_write
 }
 
 JNIEXPORT jboolean JNICALL Java_com_github_ljbo82_jserial_NativeSerialPort_flush(JNIEnv* env, jclass cls, jlong nativePort) {
+	errno = 0;
 	return serial_flush((serial_t*)nativePort);
 }
